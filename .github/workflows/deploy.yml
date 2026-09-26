@@ -24,9 +24,10 @@ jobs:
 
       # 2. DEPLOY TO ITCH.IO
       - name: Setup Butler
-        uses: remarkablegames/setup-butler@v4
+        uses: remarkablegames/setup-butler@v3
+        # Changed from @v4 to @v3 to use the correct marketplace version
 
       - name: Upload Build to itch.io
-        run: butler push . mazemodestudio/Maze-Escape:html
+        run: butler push . mazemodestudio/maze-escape:html
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
