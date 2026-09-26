@@ -27,6 +27,6 @@ jobs:
         uses: remarkablegames/setup-butler@v4
 
       - name: Upload Build to itch.io
-        run: butler push . mazemodestudio/maze-escape:html
+        run: butler push . mazemodestudio/Maze-Escape:html
         env:
           BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
