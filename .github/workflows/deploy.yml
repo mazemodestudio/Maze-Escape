@@ -1,0 +1,32 @@
+name: Deploy to GitHub Pages and itch.io
+
+on:
+  push:
+    branches:
+      - main  # Triggers the automation every time you push code to your main branch
+
+permissions:
+  contents: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      # 1. DEPLOY TO GITHUB PAGES
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: .  # Since your index.html and assets are in the root directory
+          branch: gh-pages
+
+      # 2. DEPLOY TO ITCH.IO
+      - name: Setup Butler
+        uses: remarkablegames/setup-butler@v4
+
+      - name: Upload Build to itch.io
+        run: butler push . mazemodestudio/maze-escape:html
+        env:
+          BUTLER_API_KEY: ${{ secrets.BUTLER_API_KEY }}
